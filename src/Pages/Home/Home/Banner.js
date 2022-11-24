@@ -7,7 +7,7 @@ import "./Banner.css";
 const Banner = () => {
   return (
     //
-    <div className="hero min-h-screen background-image">
+    <div className="hero text-white background-image">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="carousel rounded-3xl w-full">
           <div id="slide1" className="carousel-item relative w-full">
