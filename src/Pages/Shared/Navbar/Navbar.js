@@ -22,12 +22,23 @@ const Navbar = () => {
         <Link to="/blogs">Blogs</Link>
       </li>
       {user?.uid ? (
-        <li>
-          <button onClick={handleLogOut}>Sign out</button>
-        </li>
+        <>
+          <li>
+            <button className="bg-accent md:mr-2">
+              <Link to="/dashboard">Dashboard</Link>
+            </button>
+          </li>
+          <li>
+            <button className="bg-secondary" onClick={handleLogOut}>
+              Sign out
+            </button>
+          </li>
+        </>
       ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <Link className="btn btn-secondary" to="/login">
+            Login
+          </Link>
         </li>
       )}
     </React.Fragment>
