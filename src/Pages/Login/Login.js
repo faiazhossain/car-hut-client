@@ -1,13 +1,47 @@
-import React, { useState } from "react";
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const { signIn, providerLogin } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
+  const from = location?.state?.from?.pathname || "/";
 
   const handleLogin = (data) => {
     console.log(data);
+    setLoginError("");
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoginError(error.message);
+      });
   };
+
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className="h-[800px] flex flex-col justify-center items-center">
       <div className="w-96 p-4 shadow-xl rounded-lg">
@@ -21,8 +55,11 @@ const Login = () => {
             <input
               type="email"
               className="input input-bordered w-full max-w-xs"
-              {...register("email")}
+              {...register("email", { required: "Email is Required" })}
             />
+            {errors.email && (
+              <p className="text-error">{errors.email?.message}</p>
+            )}
           </div>
           {/* password portion */}
           <div className="form-control w-full max-w-xs">
@@ -32,8 +69,18 @@ const Login = () => {
             <input
               type="password"
               className="input input-bordered w-full max-w-xs"
-              {...register("password")}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be 6 characters or Longer",
+                },
+              })}
             />
+            {errors.password && (
+              <p className="text-red-600">{errors.password?.message}</p>
+            )}
+            {loginError && <p className="text-red-600">{loginError}</p>}
             <label className="label">
               <span className="label-text">Forget password?</span>
             </label>
@@ -52,7 +99,9 @@ const Login = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">SignUp with Google</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+          Continue with Google
+        </button>
       </div>
     </div>
   );
