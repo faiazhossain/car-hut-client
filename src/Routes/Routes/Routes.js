@@ -4,6 +4,8 @@ import Main from "../../Layout/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Brands from "../../Pages/Brands/Brands";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyBookings from "../../Pages/Dashboard/MyBookings/MyBookings";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ErrorPage from "../../Pages/Home/ErrorPage/ErrorPage";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -61,7 +63,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <MyBookings></MyBookings>,
       },
     ],
   },

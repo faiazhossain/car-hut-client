@@ -29,6 +29,8 @@ const BookingModal = ({ booking, setBooking }) => {
       email,
       tel,
       location,
+      title,
+      resaleprice,
     };
     console.log(carBooking);
     fetch("http://localhost:5000/bookings", {
@@ -36,7 +38,7 @@ const BookingModal = ({ booking, setBooking }) => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(booking),
+      body: JSON.stringify(carBooking),
     })
       .then((res) => res.json())
       .then((data) => {
