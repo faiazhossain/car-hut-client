@@ -6,6 +6,7 @@ import BrandCard from "./BrandCard";
 const Brands = () => {
   const allCars = useLoaderData();
   const [booking, setBooking] = useState(null);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-4">
       {allCars.map((singleCar) => {
@@ -17,7 +18,9 @@ const Brands = () => {
           ></BrandCard>
         );
       })}
-      {booking && <BookingModal booking={booking}></BookingModal>}
+      {booking && (
+        <BookingModal setBooking={setBooking} booking={booking}></BookingModal>
+      )}
     </div>
   );
 };

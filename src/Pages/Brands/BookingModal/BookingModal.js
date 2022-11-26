@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
-const BookingModal = ({ booking }) => {
+const BookingModal = ({ booking, setBooking }) => {
   const {
     title,
     img,
@@ -13,13 +13,39 @@ const BookingModal = ({ booking }) => {
     sellername,
   } = booking;
 
-  const {
-    register,
-    formState: { errors },
-  } = useForm();
-
   const { user } = useContext(AuthContext);
   console.log(user);
+
+  const handleBooking = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const tel = form.tel.value;
+    const location = form.location.value;
+
+    const carBooking = {
+      name,
+      email,
+      tel,
+      location,
+    };
+    console.log(carBooking);
+    fetch("http://localhost:5000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setBooking(null);
+        toast.success("Booking Confirmed");
+      });
+  };
+
   return (
     <>
       {/* Put this part before </body> tag */}
@@ -44,7 +70,7 @@ const BookingModal = ({ booking }) => {
           </div>
           {/* Form */}
 
-          <form>
+          <form onSubmit={handleBooking}>
             <div className="form-control w-full">
               {/* email portion */}
               <label className="label">
@@ -52,10 +78,10 @@ const BookingModal = ({ booking }) => {
               </label>
               <input
                 type="name"
+                name="name"
                 value={user?.displayName}
                 disabled
                 className="input input-bordered w-full "
-                {...register("name")}
               />
             </div>
 
@@ -67,10 +93,10 @@ const BookingModal = ({ booking }) => {
 
               <input
                 type="email"
+                name="email"
                 value={user?.email}
                 disabled
                 className="input input-bordered w-full"
-                {...register("email", {})}
               />
             </div>
 
@@ -82,7 +108,7 @@ const BookingModal = ({ booking }) => {
               <input
                 type="tel"
                 className="input input-bordered w-full"
-                {...register("contact", {})}
+                name="tel"
               />
             </div>
             <div className="form-control w-full ">
@@ -92,13 +118,14 @@ const BookingModal = ({ booking }) => {
               <input
                 type="text"
                 className="input input-bordered w-full"
-                {...register("location", {})}
+                name="location"
               />
             </div>
             <input
               className="btn btn-accent w-full mt-6"
-              value="Login"
+              value="Submit"
               type="submit"
+              htmlFor="booking-modal"
             />
           </form>
 
