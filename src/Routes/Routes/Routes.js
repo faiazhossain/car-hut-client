@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
+import Brands from "../../Pages/Brands/Brands";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../../Pages/Home/ErrorPage/ErrorPage";
 import Home from "../../Pages/Home/Home/Home";
@@ -16,6 +17,20 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: async () => {
+          return fetch("http://localhost:5000/brands");
+        },
+      },
+      {
+        path: "/brands/:id",
+        element: (
+          <PrivateRoute>
+            <Brands></Brands>
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) => {
+          return fetch(`http://localhost:5000/brands/${params.id}`);
+        },
       },
       {
         path: "/login",
