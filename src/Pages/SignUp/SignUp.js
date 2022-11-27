@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import useToken from "../../hooks/useToken";
+
 const SignUp = () => {
   const {
     register,
@@ -12,8 +14,13 @@ const SignUp = () => {
 
   const { createUser, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
+  if (token) {
+    navigate("/");
+  }
   const handleSignUp = (data) => {
     console.log(data);
     setSignUpError("");
@@ -22,10 +29,11 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast("user created successfully");
-        navigate("/");
+
         const userInfo = {
           displayName: data.name,
         };
+        saveUser(data.name, data.email);
         updateUser(userInfo)
           .then(() => {})
           .catch((err) => console.log(err));
@@ -35,6 +43,23 @@ const SignUp = () => {
         setSignUpError(error.message);
       });
   };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save user", data);
+        setCreatedUserEmail(email);
+      });
+  };
+
   return (
     <div className="h-[800px] flex flex-col justify-center items-center">
       <div className="w-96 p-7 bg-slate-200 rounded-xl">
@@ -87,7 +112,7 @@ const SignUp = () => {
           </div>
           <input
             className="btn btn-accent w-full mt-4"
-            value="login"
+            value="Sign up"
             type="submit"
           />
         </form>
