@@ -3,8 +3,11 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Brands from "../../Pages/Brands/Brands";
+import AddProduct from "../../Pages/Dashboard/Dashboard/AddProduct/AddProduct";
+import AddSeller from "../../Pages/Dashboard/Dashboard/AddSeller/AddSeller";
 import AllUsers from "../../Pages/Dashboard/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import ManageProducts from "../../Pages/Dashboard/ManageProducts/ManageProducts";
 import MyBookings from "../../Pages/Dashboard/MyBookings/MyBookings";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ErrorPage from "../../Pages/Home/ErrorPage/ErrorPage";
@@ -72,6 +75,22 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addproduct",
+        element: (
+          <AdminRoute>
+            <AddProduct></AddProduct>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageproduct",
+        element: (
+          <AdminRoute>
+            <ManageProducts></ManageProducts>
           </AdminRoute>
         ),
       },
