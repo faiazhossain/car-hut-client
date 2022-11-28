@@ -2,11 +2,6 @@
 
 Live website link [Car Hut](https://car-hut-294d6.web.app/).
 
-## admin part
-
-- adminEmail: <admin@gmail.com>
-- adminPassword: <1234@Admin>
-
 ## Description
 
 ---
@@ -48,3 +43,10 @@ Technologies:
 2. Allow Access with Middleware = Cors Node.js package
 3. Backend Hosting = Vercel
 4. Database = MongoDB
+
+---
+
+## admin part
+
+- adminEmail: <admin@gmail.com>
+- adminPassword: <1234@Admin>
