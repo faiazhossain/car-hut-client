@@ -1,4 +1,4 @@
-# Ilma's Dentistry
+# Car Hut
 
 Live website link [Car Hut](https://ilmas-dentistry.web.app/).
 
