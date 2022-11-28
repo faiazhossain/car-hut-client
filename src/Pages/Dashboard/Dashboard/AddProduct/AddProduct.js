@@ -20,7 +20,9 @@ const AddProduct = () => {
   const { data: specialties, isLoading } = useQuery({
     queryKey: ["title"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/brandsSelect");
+      const res = await fetch(
+        "https://car-hut-server-gilt.vercel.app/brandsSelect"
+      );
       const data = await res.json();
       return data;
     },
@@ -54,7 +56,7 @@ const AddProduct = () => {
             sellername: data.name,
           };
           console.log(product);
-          fetch("http://localhost:5000/products", {
+          fetch("https://car-hut-server-gilt.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

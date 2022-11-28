@@ -33,7 +33,7 @@ const BookingModal = ({ booking, setBooking }) => {
       resaleprice,
     };
     console.log(carBooking);
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://car-hut-server-gilt.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

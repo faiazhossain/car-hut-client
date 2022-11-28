@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         loader: async () => {
-          return fetch("http://localhost:5000/brands");
+          return fetch("https://car-hut-server-gilt.vercel.app/brands");
         },
       },
       {
@@ -41,7 +41,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
-          return fetch(`http://localhost:5000/brands/${params.id}`);
+          return fetch(
+            `https://car-hut-server-gilt.vercel.app/brands/${params.id}`
+          );
         },
       },
       {

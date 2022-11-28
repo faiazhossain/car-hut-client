@@ -1,6 +1,6 @@
 # Car Hut
 
-Live website link [Car Hut](https://ilmas-dentistry.web.app/).
+Live website link [Car Hut](https://car-hut-294d6.web.app/).
 
 ## admin part
 

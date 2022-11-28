@@ -6,11 +6,14 @@ const ManageProducts = () => {
     queryKey: "products",
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/products", {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
+        const res = await fetch(
+          "https://car-hut-server-gilt.vercel.app/products",
+          {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        );
         const data = await res.json();
         return data;
       } catch (error) {}
