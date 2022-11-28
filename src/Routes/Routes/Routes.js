@@ -5,8 +5,11 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import Brands from "../../Pages/Brands/Brands";
 import AddProduct from "../../Pages/Dashboard/Dashboard/AddProduct/AddProduct";
 import AddSeller from "../../Pages/Dashboard/Dashboard/AddSeller/AddSeller";
+import AdminUsers from "../../Pages/Dashboard/Dashboard/AdminUsers/AdminUsers";
 import AllUsers from "../../Pages/Dashboard/Dashboard/AllUsers/AllUsers";
+import Buyers from "../../Pages/Dashboard/Dashboard/Buyers/Buyers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import Sellers from "../../Pages/Dashboard/Dashboard/Sellers/Sellers";
 import ManageProducts from "../../Pages/Dashboard/ManageProducts/ManageProducts";
 import MyBookings from "../../Pages/Dashboard/MyBookings/MyBookings";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
@@ -16,6 +19,7 @@ import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -81,16 +85,32 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addproduct",
         element: (
-          <AdminRoute>
+          <SellerRoute>
             <AddProduct></AddProduct>
-          </AdminRoute>
+          </SellerRoute>
         ),
       },
       {
         path: "/dashboard/manageproduct",
         element: (
-          <AdminRoute>
+          <SellerRoute>
             <ManageProducts></ManageProducts>
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/sellers",
+        element: (
+          <AdminRoute>
+            <Sellers></Sellers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/buyers",
+        element: (
+          <AdminRoute>
+            <Buyers></Buyers>
           </AdminRoute>
         ),
       },

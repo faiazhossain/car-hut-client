@@ -34,15 +34,16 @@ const MyBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings?.map((booking, i) => (
-              <tr>
-                <th>{i + 1}</th>
-                <td>{booking.title}</td>
-                <td>{booking.location}</td>
-                <td>{booking.name}</td>
-                <td>{booking.resaleprice} lac tk</td>
-              </tr>
-            ))}
+            {bookings &&
+              bookings?.map((booking, i) => (
+                <tr>
+                  <th>{i + 1}</th>
+                  <td>{booking.title}</td>
+                  <td>{booking.location}</td>
+                  <td>{booking.name}</td>
+                  <td>{booking.resaleprice} lac tk</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

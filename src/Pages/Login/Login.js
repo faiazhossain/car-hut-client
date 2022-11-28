@@ -20,7 +20,7 @@ const Login = () => {
   const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
   const from = location?.state?.from?.pathname || "/";
-
+  const [loading, setLoading] = useState(true);
   if (token) {
     navigate(from, { replace: true });
   }

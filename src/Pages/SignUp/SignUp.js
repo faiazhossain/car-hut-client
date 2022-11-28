@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
@@ -32,7 +32,7 @@ const SignUp = () => {
         const userInfo = {
           displayName: data.name,
         };
-        saveUser(data.name, data.email);
+        saveUser(data.name, data.email, data.role);
         updateUser(userInfo)
           .then(() => {})
           .catch((err) => console.log(err));
@@ -44,8 +44,9 @@ const SignUp = () => {
       });
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
+    console.log(user);
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -60,6 +61,11 @@ const SignUp = () => {
       });
   };
 
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
   return (
     <div className="h-[800px] flex flex-col justify-center items-center">
       <div className="w-96 p-7 bg-slate-200 rounded-xl">
@@ -85,6 +91,23 @@ const SignUp = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </div>
+
+          {/* Check box */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label cursor-pointer">
+              <span className="label-text">Seller</span>
+              <input
+                type="checkbox"
+                className="checkbox"
+                {...register("role")}
+                value="seller"
+                checked={isChecked}
+                onChange={handleOnChange}
+              />
+            </label>
+          </div>
+
+          {/* password */}
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Password</span>
