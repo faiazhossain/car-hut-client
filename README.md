@@ -4,8 +4,8 @@ Live website link [Car Hut](https://ilmas-dentistry.web.app/).
 
 ## admin part
 
-- adminEmail: admin@gmail.com
-- adminPassword: 1234@Admin
+- adminEmail: <admin@gmail.com>
+- adminPassword: <1234@Admin>
 
 ## Description
 
